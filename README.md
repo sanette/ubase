@@ -22,13 +22,24 @@ San Vũ Ngọc
 print_endline nfd;; 
 San Vũ Ngọc
 
-utf8_string_to_base nfc;;
+Basechar.from_utf8_string nfc;;
  - : bytes = "San Vu Ngoc"
 
-utf8_string_to_base nfd;; 
+Basechar.from_utf8_string nfd;; 
 - : bytes = "San Vu Ngoc"
 ```
 
+## Usage
+
+```ocaml
+val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
+(** Remove all diacritics on latin letters from a standard string containing
+    UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
+    (by default "?"). If the optional parameter [strip] is present, all
+    non-ascii, non-latin unicode characters will be replaced by the [strip]
+    string (which can be empty). *)
+	```
+	
 ## Install
 
 Basechar depends on [uutf].
@@ -46,4 +57,11 @@ Download the repository, and
 
 ```
 dune utop
+```
+
+## Doc
+
+```
+dune build @doc
+firefox /_build/default/_doc/_html/index.html
 ```

@@ -19,10 +19,10 @@ San Vũ Ngọc
 print_endline nfd;; 
 San Vũ Ngọc
 
-utf8_string_to_base nfc;;
+from_utf8_string nfc;;
  - : bytes = "San Vu Ngoc"
 
-utf8_string_to_base nfd;; 
+from_utf8_string nfd;; 
 - : bytes = "San Vu Ngoc"
 ]}
 
