@@ -63,5 +63,5 @@ dune utop
 
 ```
 dune build @doc
-firefox /_build/default/_doc/_html/index.html
+firefox ./_build/default/_doc/_html/basechar/Basechar/index.html
 ```
