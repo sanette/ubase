@@ -38,7 +38,7 @@ val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
     (by default "?"). If the optional parameter [strip] is present, all
     non-ascii, non-latin unicode characters will be replaced by the [strip]
     string (which can be empty). *)
-	```
+```
 	
 ## Install
 
