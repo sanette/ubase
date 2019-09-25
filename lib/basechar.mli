@@ -20,10 +20,10 @@ print_endline nfd;;
 Vũ Ngọc Phan
 
 from_utf8_string nfc;;
- - : bytes = "Vu Ngoc Phan"
+ - : string = "Vu Ngoc Phan"
 
 from_utf8_string nfd;; 
-- : bytes = "Vu Ngoc Phan"
+- : string = "Vu Ngoc Phan"
 ]}
 
    PLEASE don't use this library to store your strings without accents! On the
@@ -37,7 +37,7 @@ from_utf8_string nfd;;
 
 val uchar_to_string : Uchar.t -> string
 (** Convert a latin utf8 char to a string which represents is base equivalent.
-   For instance [uchar_to_string "é" = "e"].
+   For instance, for the letter "é",  [uchar_to_string (Uchar.of_int 0xe8) = "e"].
 
     [uchar_to_string u] and [u] exactly represent the same char if and only if
    [u] is ascii (code < 127).
