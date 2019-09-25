@@ -1,30 +1,6 @@
 (* Conversion from UTF8 latin letters to their base character. *)
 (* San Vu Ngoc, 2019 *)
 
-(* Depends on uutf. *)
-
-(* It should work for all utf8 strings, regardless of normalization NFC, NFD,
-   NFKD, NFKC. 
-
-   example:
-
-   let nfc = "San V\197\169 Ng\225\187\141c";;
-   let nfd = "San Vu\204\131 Ngo\204\163c";;
-
-   print_endline nfc;;
-   San Vũ Ngọc
-
-   print_endline nfd;;
-   San Vũ Ngọc
-
-   utf8_string_to_base nfc;;
-   - : bytes = "San Vu Ngoc"
-
-   utf8_string_to_base nfd;;
-   - : bytes = "San Vu Ngoc"
-
-*)
-
 (* Obviously it's even better here:
    https://metacpan.org/pod/Text::Unaccent::PurePerl
 *)

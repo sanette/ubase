@@ -42,7 +42,7 @@ val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
 	
 ## Install
 
-Basechar depends on [uutf].
+Basechar depends (only) on `uutf`.
 
 Download the repository, and
 
