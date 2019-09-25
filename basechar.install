@@ -1,0 +1,15 @@
+lib: [
+  "_build/install/default/lib/basechar/META"
+  "_build/install/default/lib/basechar/basechar.a"
+  "_build/install/default/lib/basechar/basechar.cma"
+  "_build/install/default/lib/basechar/basechar.cmi"
+  "_build/install/default/lib/basechar/basechar.cmt"
+  "_build/install/default/lib/basechar/basechar.cmti"
+  "_build/install/default/lib/basechar/basechar.cmx"
+  "_build/install/default/lib/basechar/basechar.cmxa"
+  "_build/install/default/lib/basechar/basechar.cmxs"
+  "_build/install/default/lib/basechar/basechar.ml"
+  "_build/install/default/lib/basechar/basechar.mli"
+  "_build/install/default/lib/basechar/dune-package"
+  "_build/install/default/lib/basechar/opam"
+]

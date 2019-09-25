@@ -1,0 +1,4 @@
+(library
+ (name basechar)
+ (public_name basechar)
+ (libraries str uutf))
