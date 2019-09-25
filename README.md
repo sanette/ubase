@@ -44,7 +44,7 @@ val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
 
 Basechar depends (only) on `uutf`.
 
-Download the repository, and
+Download the repository, move into the [basechar] directory, and
 
 ```
 dune build
@@ -53,13 +53,15 @@ opam install .
 
 ## Testing
 
-Download the repository, and
+From the [basechar] directory:
 
 ```
 dune utop
 ```
 
 ## Doc
+
+From the [basechar] directory:
 
 ```
 dune build @doc
