@@ -10,20 +10,20 @@ It should work for all utf8 strings, regardless of normalization NFC, NFD, NFKD,
    example:
 
 {[
-let nfc = "San V\197\169 Ng\225\187\141c";; 
-let nfd = "San Vu\204\131 Ngo\204\163c";;
+let nfc = "V\197\169 Ng\225\187\141c Phan";; 
+let nfd = "Vu\204\131 Ngo\204\163c Phan";;
 
 print_endline nfc;; 
-San Vũ Ngọc
+Vũ Ngọc Phan
 
 print_endline nfd;; 
-San Vũ Ngọc
+Vũ Ngọc Phan
 
 from_utf8_string nfc;;
- - : bytes = "San Vu Ngoc"
+ - : bytes = "Vu Ngoc Phan"
 
 from_utf8_string nfd;; 
-- : bytes = "San Vu Ngoc"
+- : bytes = "Vu Ngoc Phan"
 ]}
 
    PLEASE don't use this library to store your strings without accents! On the

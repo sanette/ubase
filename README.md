@@ -13,20 +13,20 @@ this library to simplify searching and comparison.
 ## Example
 
 ```ocaml
-let nfc = "San V\197\169 Ng\225\187\141c";; 
-let nfd = "San Vu\204\131 Ngo\204\163c";;
+let nfc = "V\197\169 Ng\225\187\141c Phan";; 
+let nfd = "Vu\204\131 Ngo\204\163c Phan";;
 
 print_endline nfc;; 
-San Vũ Ngọc
+Vũ Ngọc Phan
 
 print_endline nfd;; 
-San Vũ Ngọc
+Vũ Ngọc Phan
 
 Basechar.from_utf8_string nfc;;
- - : string = "San Vu Ngoc"
+- : string = "Vu Ngoc Phan"
 
 Basechar.from_utf8_string nfd;; 
-- : string = "San Vu Ngoc"
+- : string = "Vu Ngoc Phan"
 ```
 
 ## Usage

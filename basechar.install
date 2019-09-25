@@ -13,3 +13,6 @@ lib: [
   "_build/install/default/lib/basechar/dune-package"
   "_build/install/default/lib/basechar/opam"
 ]
+doc: [
+  "_build/install/default/doc/basechar/README.md"
+]
