@@ -23,10 +23,10 @@ print_endline nfd;;
 San Vũ Ngọc
 
 Basechar.from_utf8_string nfc;;
- - : bytes = "San Vu Ngoc"
+ - : string = "San Vu Ngoc"
 
 Basechar.from_utf8_string nfd;; 
-- : bytes = "San Vu Ngoc"
+- : string = "San Vu Ngoc"
 ```
 
 ## Usage
