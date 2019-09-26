@@ -4,7 +4,6 @@
    [latin_uchar_to_base_alist]. Please add your own. *)
 let misc_to_ascii_alist = [
   0x00a0, " "; (* NO-BREAK SPACE *)
-  0x00c5, "AA"; (* "Å" = LATIN CAPITAL LETTER A WITH RING ABOVE *)
   0x00df, "ss";  (* "ß" = LATIN SMALL LETTER SHARP S *)
   0x2010, "-"; (* HYPHEN *)
   0x2013, "-"; (* EN DASH *)

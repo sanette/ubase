@@ -148,19 +148,3 @@ begin
   close_out channel;
   print_endline ("Saved in " ^file)
 end;;
-
-
-let rec dump_combining first last =
-  let name = Uucp.Name.name first in
-  let has_combining = try
-      let _ = Str.search_forward (Str.regexp "\\bCOMBINING\\b") name 0 in
-      true with
-  | Not_found -> false in
-  let is_dia = Uucp.Block.block first = `Diacriticals
-             || Uucp.Block.block first = `Diacriticals_Ext in
-  if has_combining || is_dia then
-    Printf.sprintf "%s = %i = %s, Diacriticals = %b"
-      (uchar_to_string first) (Uchar.to_int first) name is_dia
-    |> print_endline;
-  if not (Uchar.equal first last)
-  then dump_combining (Uchar.succ first) last
