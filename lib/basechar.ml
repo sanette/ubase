@@ -15,23 +15,13 @@
    decomposes to itself. *)
 
 
-(* This list is manually created and overrides the automatically generated list
-   [latin_uchar_to_base_alist]. Please add your own. *)
-let misc_to_ascii_alist = [
-  0x2018, "'"; (* LEFT SINGLE QUOTATION MARK *)
-  0x2019, "'"; (* RIGHT SINGLE QUOTATION MARK *)
-  0x201c, "\""; (* LEFT DOUBLE QUOTATION MARK *)
-  0x201d, "\"";  (* RIGHT DOUBLE QUOTATION MARK *)
-  
-]
-
 module Int = struct type t = int let compare : int -> int -> int = compare end
 module Imap = Map.Make(Int)
       
 let latin_uchar_to_base_map =
   let add map (k, v) = Imap.add k v map in
   let map1 = List.fold_left add Imap.empty Basechar_data.latin_uchar_to_base_alist in
-  List.fold_left add map1 misc_to_ascii_alist    
+  List.fold_left add map1 Basechar_custom.misc_to_ascii_alist    
   
 let uchar_to_string u =
   let x = Uchar.to_int u in

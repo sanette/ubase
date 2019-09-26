@@ -1,4 +1,6 @@
 lib: [
+  "_build/install/default/lib/basechar/.private/basechar__Basechar_custom.cmi" {".private/basechar__Basechar_custom.cmi"}
+  "_build/install/default/lib/basechar/.private/basechar__Basechar_data.cmi" {".private/basechar__Basechar_data.cmi"}
   "_build/install/default/lib/basechar/META"
   "_build/install/default/lib/basechar/basechar.a"
   "_build/install/default/lib/basechar/basechar.cma"
@@ -14,9 +16,11 @@ lib: [
   "_build/install/default/lib/basechar/basechar__.cmt"
   "_build/install/default/lib/basechar/basechar__.cmx"
   "_build/install/default/lib/basechar/basechar__.ml"
-  "_build/install/default/lib/basechar/basechar__Basechar_data.cmi"
+  "_build/install/default/lib/basechar/basechar__Basechar_custom.cmt"
+  "_build/install/default/lib/basechar/basechar__Basechar_custom.cmx"
   "_build/install/default/lib/basechar/basechar__Basechar_data.cmt"
   "_build/install/default/lib/basechar/basechar__Basechar_data.cmx"
+  "_build/install/default/lib/basechar/basechar_custom.ml"
   "_build/install/default/lib/basechar/basechar_data.ml"
   "_build/install/default/lib/basechar/dune-package"
   "_build/install/default/lib/basechar/opam"

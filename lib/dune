@@ -1,4 +1,5 @@
 (library
  (name basechar)
  (public_name basechar)
+ (private_modules basechar_custom basechar_data) 
  (libraries str uutf))
