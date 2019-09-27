@@ -25,6 +25,9 @@ lib: [
   "_build/install/default/lib/basechar/dune-package"
   "_build/install/default/lib/basechar/opam"
 ]
+bin: [
+  "_build/install/default/bin/basechar"
+]
 doc: [
   "_build/install/default/doc/basechar/README.md"
 ]

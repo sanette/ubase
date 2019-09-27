@@ -59,6 +59,21 @@ From the `basechar` directory:
 dune utop
 ```
 
+## From the command line
+
+Once you have installed the library, you can execute the `basechar`
+program from a terminal
+
+```
+$ basechar Déjà vu !
+Deja vu !
+
+$ basechar "et grønt træ"
+et gront trae
+```
+
+(Notice that the quotes "" are not required)
+
 ## Doc
 
 From the `basechar` directory:

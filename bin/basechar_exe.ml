@@ -1,6 +1,4 @@
-let default o x = match o with
-  | None -> x
-  | Some y -> y
+(* This file is part of Basechar *)
 
 let () =
 
