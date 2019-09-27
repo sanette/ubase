@@ -1,0 +1,5 @@
+(executable
+ (name basechar_exe)
+ (public_name basechar)
+ (libraries basechar)
+ (package basechar))
