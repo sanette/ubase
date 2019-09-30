@@ -69,13 +69,17 @@ let letter_replacement = [
   "IOTA", "I";
   "LAMBDA", "L";
   "UPSILON", "U";
+  "PHI", "PH";
   "CHI", "X";
   "OMEGA", "O";
   "ETH", "D";
   "THORN", "TH";
   "ENG", "NG";
   "ESH", "SH";
+  "TESH", "TSH";
   "EZH", "Z";
+  "DEZH", "DZ";
+  "LEZH", "LZ";
   "STOP", "TS";
   "WYNN", "W";
   "SCHWA", "E";
@@ -92,7 +96,8 @@ let letter_replacement = [
   "FIVE", "5";
   "SIX", "6";
   "SALTILLO", "'";
-  "DOT", ":"  
+  "DOT", ":";
+  "SAKHA", "WA";
 ]
 
 
@@ -100,7 +105,8 @@ let cleanup_name name =
   Str.global_replace unwanted_adjectives_regexp "" name
 
 (* Convert a latin Uchar to a string containing its base letter. Uchar that
-   don't have a latin base letter are kept unmodified.  *)
+   don't have a latin base letter are kept unmodified. Rare letters with no
+   obvious equivalent are put between braces, like "spirant" => "{spirant}" *)
 let latin_to_base ?name u =
   let name = default name (Uucp.Name.name u) in
   if is_diacritical_or_combining u name
@@ -114,6 +120,8 @@ let latin_to_base ?name u =
           (Str.regexp "\\bLETTER \\([A-Z]+\\)\\b") name 0 in
       let letter = Str.matched_group 1 name in
       let letter = default (List.assoc_opt letter letter_replacement) letter in
+      let letter = if String.length letter > 3 then "{" ^ letter ^ "}"
+        else letter in
       if Uucp.Case.is_lower u then String.lowercase_ascii letter else letter
     with
     | Not_found -> uchar_to_string u

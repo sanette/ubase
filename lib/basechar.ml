@@ -49,3 +49,4 @@ let from_utf8_string ?(malformed="?") ?strip s =
   Uutf.String.fold_utf_8 folder () s;
   Buffer.to_bytes b
 
+
