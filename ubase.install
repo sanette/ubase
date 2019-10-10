@@ -1,0 +1,33 @@
+lib: [
+  "_build/install/default/lib/ubase/.private/ubase__Ubase_custom.cmi" {".private/ubase__Ubase_custom.cmi"}
+  "_build/install/default/lib/ubase/.private/ubase__Ubase_data.cmi" {".private/ubase__Ubase_data.cmi"}
+  "_build/install/default/lib/ubase/META"
+  "_build/install/default/lib/ubase/dune-package"
+  "_build/install/default/lib/ubase/opam"
+  "_build/install/default/lib/ubase/ubase.a"
+  "_build/install/default/lib/ubase/ubase.cma"
+  "_build/install/default/lib/ubase/ubase.cmi"
+  "_build/install/default/lib/ubase/ubase.cmt"
+  "_build/install/default/lib/ubase/ubase.cmti"
+  "_build/install/default/lib/ubase/ubase.cmx"
+  "_build/install/default/lib/ubase/ubase.cmxa"
+  "_build/install/default/lib/ubase/ubase.cmxs"
+  "_build/install/default/lib/ubase/ubase.ml"
+  "_build/install/default/lib/ubase/ubase.mli"
+  "_build/install/default/lib/ubase/ubase__.cmi"
+  "_build/install/default/lib/ubase/ubase__.cmt"
+  "_build/install/default/lib/ubase/ubase__.cmx"
+  "_build/install/default/lib/ubase/ubase__.ml"
+  "_build/install/default/lib/ubase/ubase__Ubase_custom.cmt"
+  "_build/install/default/lib/ubase/ubase__Ubase_custom.cmx"
+  "_build/install/default/lib/ubase/ubase__Ubase_data.cmt"
+  "_build/install/default/lib/ubase/ubase__Ubase_data.cmx"
+  "_build/install/default/lib/ubase/ubase_custom.ml"
+  "_build/install/default/lib/ubase/ubase_data.ml"
+]
+bin: [
+  "_build/install/default/bin/ubase"
+]
+doc: [
+  "_build/install/default/doc/ubase/README.md"
+]
