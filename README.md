@@ -1,4 +1,4 @@
-# Basechar
+# Ubase
 
 Ocaml library for removing diacritics (accents, etc.) from Latin
 letters in UTF8 string.
@@ -22,10 +22,10 @@ Vũ Ngọc Phan
 print_endline nfd;; 
 Vũ Ngọc Phan
 
-Basechar.from_utf8_string nfc;;
+Ubase.from_utf8_string nfc;;
 - : string = "Vu Ngoc Phan"
 
-Basechar.from_utf8_string nfd;; 
+Ubase.from_utf8_string nfd;; 
 - : string = "Vu Ngoc Phan"
 ```
 
@@ -42,9 +42,9 @@ val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
 	
 ## Install
 
-Basechar depends (only) on `uutf`.
+Ubase depends (only) on `uutf`.
 
-Download the repository, move into the `basechar` directory, and
+Download the repository, move into the `ubase` directory, and
 
 ```
 dune build
@@ -53,7 +53,7 @@ opam install .
 
 ## Testing
 
-From the `basechar` directory:
+From the `ubase` directory:
 
 ```
 dune utop
@@ -61,14 +61,14 @@ dune utop
 
 ## From the command line
 
-Once you have installed the library, you can execute the `basechar`
+Once you have installed the library, you can execute the `ubase`
 program from a terminal
 
 ```
-$ basechar Déjà vu !
+$ ubase Déjà vu !
 Deja vu !
 
-$ basechar "et grønt træ"
+$ ubase "et grønt træ"
 et gront trae
 ```
 
@@ -76,9 +76,9 @@ et gront trae
 
 ## Doc
 
-From the `basechar` directory:
+From the `ubase` directory:
 
 ```
 dune build @doc
-firefox ./_build/default/_doc/_html/basechar/Basechar/index.html
+firefox ./_build/default/_doc/_html/ubase/Ubase/index.html
 ```

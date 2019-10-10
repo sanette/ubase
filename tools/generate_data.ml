@@ -104,7 +104,7 @@ let letter_replacement = [
 let cleanup_name name =
   Str.global_replace unwanted_adjectives_regexp "" name
 
-(* Convert a latin Uchar to a string containing its base letter. Uchar that
+(* Convert a latin Uchar to a string containing its base letter. Uchars that
    don't have a latin base letter are kept unmodified. Rare letters with no
    obvious equivalent are put between braces, like "spirant" => "{spirant}" *)
 let latin_to_base ?name u =
@@ -125,13 +125,6 @@ let latin_to_base ?name u =
       if Uucp.Case.is_lower u then String.lowercase_ascii letter else letter
     with
     | Not_found -> uchar_to_string u
-
-(* Convert a Uchar to a its base character (char), or the unknown char *)
-(* note that the "ae" letter => 'a', "oe" => 'o', etc. *)
-let latin_to_char ?(unknown='?') u =
-  let s = latin_to_base u in
-  if String.length s > 2 then unknown
-  else s.[0]
 
 let dump_all_latin_to_base ?(channel = stdout) () =
   let rec loop u =
@@ -156,3 +149,72 @@ begin
   close_out channel;
   print_endline ("Saved in " ^file)
 end;;
+
+let dump_space () =
+  let rec loop u =
+    let name = Uucp.Name.name u in
+    let t = uchar_to_string u in
+    if Uucp.White.is_white_space u then begin
+      Printf.printf
+        "0x%04x, \" \"; (* \"%s\" = %s *)\n" (Uchar.to_int u)
+        (if Uchar.to_int u < 32 then String.escaped t else t) name;
+    end;
+    if not (Uchar.equal u Uchar.max) then loop (Uchar.succ u)
+  in
+  loop Uchar.min;;
+
+#require "uunf";;
+
+(****)
+(* This is taken from
+   https://erratique.ch/software/uucp/doc/Uucp.Case.html#caselesseq *)
+
+let canonical_caseless_key s =
+  let b = Buffer.create (String.length s * 2) in
+  let to_nfd_and_utf_8 =
+    let n = Uunf.create `NFD in
+    let rec add v = match Uunf.add n v with
+      | `Await | `End -> ()
+      | `Uchar u -> Uutf.Buffer.add_utf_8 b u; add `Await
+    in
+    add
+  in
+  let add =
+    let n = Uunf.create `NFD in
+    let rec add v = match Uunf.add n v with
+      | `Await | `End -> ()
+      | `Uchar u ->
+        begin match Uucp.Case.Fold.fold u with
+          | `Self -> to_nfd_and_utf_8 (`Uchar u)
+          | `Uchars us -> List.iter (fun u -> to_nfd_and_utf_8 (`Uchar u)) us
+        end;
+        add `Await
+    in
+    add
+  in
+  let add_uchar _ _ = function
+    | `Malformed  _ -> add (`Uchar Uutf.u_rep)
+    | `Uchar _ as u -> add u
+  in
+  Uutf.String.fold_utf_8 add_uchar () s;
+  add `End;
+  to_nfd_and_utf_8 `End;
+  Buffer.contents b
+
+(****)
+
+let dump_casefolding ?(channel = stdout) () =
+  let rec loop u =
+    let name = Uucp.Name.name u in
+    if is_latin ~name u then begin
+      let t = uchar_to_string u in
+      let cf = canonical_caseless_key t in
+      if cf <> t then begin
+        Printf.fprintf channel
+          "0x%04x, \"%s\"; (* \"%s\" = %s *)\n" (Uchar.to_int u) cf t name;
+      end;
+    end;
+    if not (Uchar.equal u Uchar.max) then loop (Uchar.succ u)
+  in
+  loop Uchar.min;;
+

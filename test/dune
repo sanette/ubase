@@ -1,6 +1,6 @@
 (executable
  (name test)
- (libraries basechar))
+ (libraries ubase))
 
 (alias
  (name buildtest)

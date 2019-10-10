@@ -1,14 +1,14 @@
 (lang dune 1.11)
-(name basechar)
+(name ubase)
 (version "0.01")
 (generate_opam_files true)
 (license GPL2)
 (maintainers "Vu Ngoc San <san.vu-ngoc@laposte.net>")
 (authors "Vu Ngoc San <san.vu-ngoc@laposte.net>")
-(source (github sanette/basechar))
+(source (github sanette/ubase))
 
 (package
- (name basechar)
+ (name ubase)
  (synopsis "Remove diacritics from latin utf8 strings")
  (tags ("utf8"))
  (depends

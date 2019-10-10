@@ -1,5 +1,5 @@
 (executable
- (name basechar_exe)
- (public_name basechar)
- (libraries basechar)
- (package basechar))
+ (name ubase_exe)
+ (public_name ubase)
+ (libraries ubase)
+ (package ubase))
