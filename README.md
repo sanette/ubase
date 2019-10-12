@@ -82,3 +82,8 @@ From the `ubase` directory:
 dune build @doc
 firefox ./_build/default/_doc/_html/ubase/Ubase/index.html
 ```
+
+## Using Ubase for accent-insensitive searching
+
+Have a look at [Ufind](https://github.com/sanette/ufind), a small
+search engine based on Ubase.
