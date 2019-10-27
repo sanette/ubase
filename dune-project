@@ -1,6 +1,6 @@
 (lang dune 1.11)
 (name ubase)
-(version "0.01")
+(version "0.02")
 (generate_opam_files true)
 (license GPL2)
 (maintainers "Vu Ngoc San <san.vu-ngoc@laposte.net>")

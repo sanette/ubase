@@ -1,13 +1,21 @@
 (** Conversion from UTF8 latin letters to their base character.
 
-Use this to remove diacritics (accents, etc.) from Latin letters in UTF8 string.
+    Use this to remove diacritics (accents, etc.) from Latin letters in UTF8
+   string.
 
-Depends on uutf.
+    Depends on [uutf].  It should work for all utf8 strings, regardless of
+   normalization NFC, NFD, NFKD, NFKC.
 
-It should work for all utf8 strings, regardless of normalization NFC, NFD, NFKD,
-   NFKC.
+   
+    PLEASE don't use this library to store your strings without accents! On the
+   contrary, store them in full UTF8 encoding, and use this library to simplify
+   searching and comparison.
 
-   example:
+    @author San Vu Ngoc, 2019
+
+*)
+
+(** {1 Example} 
 
 {[
 let nfc = "V\197\169 Ng\225\187\141c Phan";; 
@@ -26,24 +34,38 @@ from_utf8_string nfd;;
 - : string = "Vu Ngoc Phan"
 ]}
 
-   PLEASE don't use this library to store your strings without accents! On the
-   contrary, store them in full UTF8 encoding, and use this library to simplify
-   searching and comparison.
-
-@author San Vu Ngoc, 2019
-
 *)
 
+(** {1 Removing accents} *)
 
+val from_utf8 : ?malformed:string -> ?strip:string -> string -> string
+(** Remove all diacritics on Latin letters from a standard string containing
+   UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
+   (by default "?"). If the optional parameter [strip] is present, all
+   non-ASCII, non-Latin unicode characters will be replaced by the [strip]
+   string (which can be empty). If both [malformed] and [string] contain only
+   ASCII characters, then the result of [from_utf8_string] is guaranteed to
+   contain only ASCII characters. *)
+
+val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
+(** Deprecated. Same as {!from_utf8}. *)
+
+(**/**)
+(* slower, initial version; just for testing. *)
+val from_utf8_old : ?malformed:string -> ?strip:string -> string -> string
+(**/**)
+
+(***)
+  
 val uchar_to_string : Uchar.t -> string
 (** Convert a latin utf8 char to a string which represents is base equivalent.
    For instance, for the letter "é", [uchar_to_string (Uchar.of_int 0xe8) =
    "e"].
 
     [uchar_to_string u] and [u] exactly represent the same char if and only if
-   [u] is ascii (code < 127).
+   [u] is ascii (code <= 127).
 
-    @raise [Not_found] if the uchar is not recognized as a latin letter with
+   Raises [Not_found] if the uchar is not recognized as a latin letter with
    diacritic.
 
     A number of other conversions are performed, which are not about finding the
@@ -55,12 +77,12 @@ val uchar_to_char : ?unknown:char -> Uchar.t -> char
 (** Similar to {!uchar_to_string} except that it returns a single char. Thus,
    some simplifications have to be made. Unusual letters will be replaced by
    [unknown] (which defaults to '?').  *)
+
+(** {1 Utilities} *)
   
-val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
-(** Remove all diacritics on Latin letters from a standard string containing
-   UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
-   (by default "?"). If the optional parameter [strip] is present, all
-   non-ASCII, non-Latin unicode characters will be replaced by the [strip]
-   string (which can be empty). If both [malformed] and [string] contain only
-   ASCII characters, then the result of [from_utf8_string] is guaranteed to
-   contain only ASCII characters. *)
+val isolatin_to_utf8 : string -> string
+(** Convert an ISO_8859_1 string to a UTF8 string. *)
+
+val is_space : Uchar.t -> bool
+(** Return true if the character is considered as a white space (this includes
+   tab and newline). *)

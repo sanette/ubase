@@ -1,4 +1,4 @@
-(* This file is part of Basename. *)
+(* This file is part of Ubase. *)
 
 (* This list is automatically generated. *)
 let latin_uchar_to_base_alist = [

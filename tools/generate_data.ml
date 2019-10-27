@@ -138,17 +138,19 @@ let dump_all_latin_to_base ?(channel = stdout) () =
     if not (Uchar.equal u Uchar.max) then loop (Uchar.succ u)
   in
   loop Uchar.min;;
-    
-let t = Unix.gettimeofday () in
-begin
-  let file = Filename.temp_file "utf8-" "" in
-  let channel = open_out file in
-  print_endline "Generating table, please wait...";
-  dump_all_latin_to_base ~channel ();
-  print_endline (Printf.sprintf "Time = %f" (Unix.gettimeofday () -. t));
-  close_out channel;
-  print_endline ("Saved in " ^file)
-end;;
+
+(* à effectuer pour mettre à jour ubase_data *)
+let generate_ubase_data () =
+  let t = Unix.gettimeofday () in
+  begin
+    let file = Filename.temp_file "utf8-" "" in
+    let channel = open_out file in
+    print_endline "Generating table, please wait...";
+    dump_all_latin_to_base ~channel ();
+    print_endline (Printf.sprintf "Time = %f" (Unix.gettimeofday () -. t));
+    close_out channel;
+    print_endline ("Saved in " ^file)
+  end;;
 
 let dump_space () =
   let rec loop u =
@@ -166,6 +168,7 @@ let dump_space () =
 #require "uunf";;
 
 (****)
+(* CF_D145 *)
 (* This is taken from
    https://erratique.ch/software/uucp/doc/Uucp.Case.html#caselesseq *)
 
@@ -203,12 +206,12 @@ let canonical_caseless_key s =
 
 (****)
 
-let dump_casefolding ?(channel = stdout) () =
+let dump_casefolding ?(channel = stdout) cf_fn =
   let rec loop u =
     let name = Uucp.Name.name u in
     if is_latin ~name u then begin
       let t = uchar_to_string u in
-      let cf = canonical_caseless_key t in
+      let cf = cf_fn t in
       if cf <> t then begin
         Printf.fprintf channel
           "0x%04x, \"%s\"; (* \"%s\" = %s *)\n" (Uchar.to_int u) cf t name;
@@ -218,3 +221,4 @@ let dump_casefolding ?(channel = stdout) () =
   in
   loop Uchar.min;;
 
+let dump_d145 ?(channel = stdout) () = dump_casefolding ~channel canonical_caseless_key
