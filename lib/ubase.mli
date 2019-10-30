@@ -56,27 +56,24 @@ val from_utf8_old : ?malformed:string -> ?strip:string -> string -> string
 (**/**)
 
 (***)
-  
-val uchar_to_string : Uchar.t -> string
-(** Convert a latin utf8 char to a string which represents is base equivalent.
-   For instance, for the letter "é", [uchar_to_string (Uchar.of_int 0xe8) =
-   "e"].
 
-    [uchar_to_string u] and [u] exactly represent the same char if and only if
-   [u] is ascii (code <= 127).
-
-   Raises [Not_found] if the uchar is not recognized as a latin letter with
-   diacritic.
+val uchar_replacement : Uchar.t -> string option
+(** [uchar_replacement u] returns the replacement string for [u], representing
+   its base letter without accent or diacritics, but only if [u] admits such a
+   replacement.
 
     A number of other conversions are performed, which are not about finding the
    base letter, but an ascii equivalent of some non-ascii utf8 characters: for
    instance, single quotation marks/apostrophes (U+2018, U+2019) and double
-   quotation marks (U+201c, U+201d). *)
+   quotation marks (U+201c, U+201d).
+
+    The returned string is guaranteed to be represented by a char that is
+   different from [u].  *)
 
 val uchar_to_char : ?unknown:char -> Uchar.t -> char
-(** Similar to {!uchar_to_string} except that it returns a single char. Thus,
-   some simplifications have to be made. Unusual letters will be replaced by
-   [unknown] (which defaults to '?').  *)
+(** Convert a Uchar to a single char representing its base letter, without
+   diacritics. For this, some simplifications have to be made. Unusual letters
+   will be replaced by [unknown] (which defaults to '?').  *)
 
 (** {1 Utilities} *)
   

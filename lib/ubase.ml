@@ -24,13 +24,22 @@ let latin_uchar_to_base_map =
   let add map (k, v) = Imap.add k v map in
   let map1 = List.fold_left add Imap.empty Ubase_data.latin_uchar_to_base_alist in
   List.fold_left add map1 Ubase_custom.misc_to_ascii_alist    
-  
+
+(** Convert a latin utf8 char to a string which represents is base equivalent.
+   For instance, for the letter "é", [uchar_to_string (Uchar.of_int 0xe8) =
+   "e"].
+
+    [uchar_to_string u] and [u] exactly represent the same char if and only if
+   [u] is ascii (code <= 127).
+
+   Raises [Not_found] if the uchar is not recognized as a latin letter with
+   diacritic. *)
 let uchar_to_string u =
   let x = Uchar.to_int u in
   if x <= 126 then Char.chr x |> String.make 1
   else Imap.find (Uchar.to_int u) latin_uchar_to_base_map
 
-let uchar_to_string_opt u =
+let uchar_replacement u =
   Imap.find_opt (Uchar.to_int u) latin_uchar_to_base_map
 
 let string_to_char ?(unknown='?') s = 
@@ -74,7 +83,7 @@ let from_utf8 ?(malformed="?") ?strip s =
     | `Uchar u ->
       if Uchar.to_int u <= 127
       then Uutf.Buffer.add_utf_8 b u
-      else match uchar_to_string_opt u with
+      else match uchar_replacement u with
       | Some t -> Buffer.add_string b t
       | None -> strip u
   in
