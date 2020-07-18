@@ -13,5 +13,5 @@
  (tags ("utf8"))
  (depends
   (uutf (>= 1.0.1))
-  (dune (>= 1.10))
+  (ocaml (>= 4.05.0))	
 ))
