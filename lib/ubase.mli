@@ -6,7 +6,7 @@
     Depends on [uutf].  It should work for all utf8 strings, regardless of
    normalization NFC, NFD, NFKD, NFKC.
 
-   
+
     PLEASE don't use this library to store your strings without accents! On the
    contrary, store them in full UTF8 encoding, and use this library to simplify
    searching and comparison.
@@ -15,22 +15,22 @@
 
 *)
 
-(** {1 Example} 
+(** {1 Example}
 
 {[
-let nfc = "V\197\169 Ng\225\187\141c Phan";; 
+let nfc = "V\197\169 Ng\225\187\141c Phan";;
 let nfd = "Vu\204\131 Ngo\204\163c Phan";;
 
-print_endline nfc;; 
+print_endline nfc;;
 Vũ Ngọc Phan
 
-print_endline nfd;; 
+print_endline nfd;;
 Vũ Ngọc Phan
 
-from_utf8_string nfc;;
+from_utf8 nfc;;
  - : string = "Vu Ngoc Phan"
 
-from_utf8_string nfd;; 
+from_utf8 nfd;;
 - : string = "Vu Ngoc Phan"
 ]}
 
@@ -76,7 +76,7 @@ val uchar_to_char : ?unknown:char -> Uchar.t -> char
    will be replaced by [unknown] (which defaults to '?').  *)
 
 (** {1 Utilities} *)
-  
+
 val isolatin_to_utf8 : string -> string
 (** Convert an ISO_8859_1 string to a UTF8 string. *)
 

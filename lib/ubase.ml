@@ -2,7 +2,10 @@
    Conversion from UTF8 latin letters to their base character. *)
 (* San Vu Ngoc, 2019 *)
 
-(* More complete here:
+(*
+   A similar OCaml library: https://github.com/geneweb/unidecode
+
+   More complete here:
    https://metacpan.org/pod/Text::Unaccent::PurePerl
 
    They have 4013 bindings (including 1239 that return ascii), because they
@@ -19,13 +22,13 @@
 module Int = struct type t = int let compare : int -> int -> int = compare end
 module Imap = Map.Make(Int)
 module Iset = Set.Make(Int)
-      
+
 let latin_uchar_to_base_map =
   let add map (k, v) = Imap.add k v map in
   let map1 = List.fold_left add Imap.empty Ubase_data.latin_uchar_to_base_alist in
-  List.fold_left add map1 Ubase_custom.misc_to_ascii_alist    
+  List.fold_left add map1 Ubase_custom.misc_to_ascii_alist
 
-(** Convert a latin utf8 char to a string which represents is base equivalent.
+(* Convert a latin utf8 char to a string which represents is base equivalent.
    For instance, for the letter "é", [uchar_to_string (Uchar.of_int 0xe8) =
    "e"].
 
@@ -42,7 +45,7 @@ let uchar_to_string u =
 let uchar_replacement u =
   Imap.find_opt (Uchar.to_int u) latin_uchar_to_base_map
 
-let string_to_char ?(unknown='?') s = 
+let string_to_char ?(unknown='?') s =
   if String.length s > 2 then unknown
   else s.[0]
 
@@ -69,7 +72,7 @@ let from_utf8_old ?(malformed="?") ?strip s =
 (* Using options in the main function is quite faster than exceptions:
    [uchar_to_string] ==> Test Vietnamese ==> number per sec = 27324
    [uchar_to_string_opt] ==> Test Vietnamese ==> number per sec = 36666
-   ==> 34% improvement ! 
+   ==> 34% improvement !
    Even better with French test (less accents).
    Isolating the strip function ==> 37500
 *)
@@ -120,7 +123,7 @@ let isolatin_to_utf8 s =
   recode ~encoding `UTF_8 (`String s) (`Buffer b);
   Buffer.contents b;;
 
-let white_space_set = Iset.of_list Ubase_custom.white_space
+let white_space_set = Iset.of_list Ubase_data.white_space
 
 let is_space u =
   Iset.mem (Uchar.to_int u) white_space_set

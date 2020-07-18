@@ -1,3 +1,10 @@
+(* San VU NGOC 2019. Bilbiothèque "Ubase".
+
+Script utilisé pour mettre les tables à jour. 
+Sous emacs, "evaluate buffer", puis generate_ubase_data ()
+
+*)
+
 #require "unix";;
 #require "str";;
 #require "uucp";;
@@ -7,7 +14,7 @@ let default o d =
   match o with
   | None -> d
   | Some x -> x
-    
+
 let rec print_names first last =
   let name = Uucp.Name.name first in
   print_endline name;
@@ -18,7 +25,7 @@ let uchar_to_string u : string  =
   let b = Buffer.create 3 in
   Uutf.Buffer.add_utf_8 b u;
   Buffer.to_bytes b
-    
+
 let is_latin ?name u =
   let name = default name (Uucp.Name.name u) in
   Uucp.Script.script u = `Latn ||
@@ -139,31 +146,48 @@ let dump_all_latin_to_base ?(channel = stdout) () =
   in
   loop Uchar.min;;
 
-(* à effectuer pour mettre à jour ubase_data *)
-let generate_ubase_data () =
-  let t = Unix.gettimeofday () in
-  begin
-    let file = Filename.temp_file "utf8-" "" in
-    let channel = open_out file in
-    print_endline "Generating table, please wait...";
-    dump_all_latin_to_base ~channel ();
-    print_endline (Printf.sprintf "Time = %f" (Unix.gettimeofday () -. t));
-    close_out channel;
-    print_endline ("Saved in " ^file)
-  end;;
-
-let dump_space () =
+let dump_space ?(channel = stdout) () =
   let rec loop u =
     let name = Uucp.Name.name u in
     let t = uchar_to_string u in
     if Uucp.White.is_white_space u then begin
-      Printf.printf
-        "0x%04x, \" \"; (* \"%s\" = %s *)\n" (Uchar.to_int u)
+      Printf.fprintf channel
+        "0x%04x; (* \"%s\" = %s *)\n" (Uchar.to_int u)
         (if Uchar.to_int u < 32 then String.escaped t else t) name;
     end;
     if not (Uchar.equal u Uchar.max) then loop (Uchar.succ u)
   in
   loop Uchar.min;;
+
+(* à effectuer pour mettre à jour ubase_data *)
+let generate_ubase_data () =
+  let t = Unix.gettimeofday () in
+  let file = "../lib/ubase_data.ml" in
+  let channel = open_out file in
+  print_endline "Generating table, please wait...";
+  {|(* This file is part of Ubase. It is automatically generated *)
+
+let latin_uchar_to_base_alist = [
+|}
+  |> output_string channel;
+  dump_all_latin_to_base ~channel ();
+  print_endline (Printf.sprintf "Latin Base Time = %f" (Unix.gettimeofday () -. t));
+  output_string channel "(* end of latin_uchar_to_base_alist *)
+]
+
+let white_space = [
+";
+  dump_space ~channel ();
+  print_endline (Printf.sprintf "+ White Space Time = %f" (Unix.gettimeofday () -. t));
+  output_string channel "(* end of white space *)
+]
+
+(* End of ubase_data.ml *)
+";
+  close_out channel;
+  print_endline ("Saved in " ^ file);
+  file;;
+
 
 #require "uunf";;
 
