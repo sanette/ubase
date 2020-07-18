@@ -76,7 +76,8 @@ et gront trae
 
 ## Doc
 
-Documentation and API are available [here](https://sanette.github.io/ubase/docs).
+Documentation and API are available
+[here](https://sanette.github.io/ubase/docs).
 
 Manually building the docs, from the `ubase` directory:
 
