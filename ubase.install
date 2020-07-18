@@ -29,5 +29,7 @@ bin: [
   "_build/install/default/bin/ubase"
 ]
 doc: [
+  "_build/install/default/doc/ubase/CHANGES.md"
+  "_build/install/default/doc/ubase/LICENSE"
   "_build/install/default/doc/ubase/README.md"
 ]

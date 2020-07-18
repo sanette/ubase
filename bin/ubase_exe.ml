@@ -25,6 +25,6 @@ let () =
 
   (* Executing command *)
   let out = Ubase.from_utf8_string ~malformed:!malformed ?strip:!strip
-      (Buffer.to_bytes text) in
+      (Buffer.contents text) in
   print_endline out;;
 

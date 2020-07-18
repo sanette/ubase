@@ -67,7 +67,7 @@ let from_utf8_old ?(malformed="?") ?strip s =
         | Some strip ->  Buffer.add_string b strip
   in
   Uutf.String.fold_utf_8 folder () s;
-  Buffer.to_bytes b
+  Buffer.contents b
 
 (* Using options in the main function is quite faster than exceptions:
    [uchar_to_string] ==> Test Vietnamese ==> number per sec = 27324
@@ -91,7 +91,7 @@ let from_utf8 ?(malformed="?") ?strip s =
       | None -> strip u
   in
   Uutf.String.fold_utf_8 folder () s;
-  Buffer.to_bytes b
+  Buffer.contents b
 
 (* For compatibility with older API *)
 let from_utf8_string = from_utf8
