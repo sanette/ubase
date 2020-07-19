@@ -7,6 +7,9 @@ let test_viet () =
   =
   "Vu Ngoc Phan (1902-1987) la nha van, nha nghien cuu van hoc hien dai va van hoc dan gian Viet Nam. Trong nhung nam dau cam but, ong con co but danh la Chi Qua Thi." in
   assert b;
+  let t = "Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho một ông người lớn."
+          |> Ubase.from_utf8 in
+  assert (t = "Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.");
   print_endline "OK."
 
 let test_french () =

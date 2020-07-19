@@ -22,17 +22,17 @@ Vũ Ngọc Phan
 print_endline nfd;; 
 Vũ Ngọc Phan
 
-Ubase.from_utf8_string nfc;;
+Ubase.from_utf8 nfc;;
 - : string = "Vu Ngoc Phan"
 
-Ubase.from_utf8_string nfd;; 
+Ubase.from_utf8 nfd;; 
 - : string = "Vu Ngoc Phan"
 ```
 
 ## Usage
 
 ```ocaml
-val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
+val from_utf8 : ?malformed:string -> ?strip:string -> string -> string
 (** Remove all diacritics on latin letters from a standard string containing
     UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
     (by default "?"). If the optional parameter [strip] is present, all
