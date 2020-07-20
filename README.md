@@ -33,23 +33,41 @@ Ubase.from_utf8 nfd;;
 
 ```ocaml
 val from_utf8 : ?malformed:string -> ?strip:string -> string -> string
-(** Remove all diacritics on latin letters from a standard string containing
-    UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
-    (by default "?"). If the optional parameter [strip] is present, all
-    non-ascii, non-latin unicode characters will be replaced by the [strip]
-    string (which can be empty). *)
+(** Remove all diacritics on Latin letters from a standard string containing
+   UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
+   (by default "?"). If the optional parameter [strip] is present, all
+   non-ASCII, non-Latin unicode characters will be replaced by the [strip]
+   string (which can be empty). If both [malformed] and [string] contain only
+   ASCII characters, then the result of [from_utf8_string] is guaranteed to
+   contain only ASCII characters. *)
 ```
-	
+
+If your accented string is encoded in isolatin, you first have to
+convert it to utf8 using `isolatin_to_utf8 mystring`.
+
+
 ## Install
 
-Ubase depends (only) on `uutf`.
+`ubase` is available on `opam`:
+```
+opam install ubase
+```
+That's it! You can test the ubase executable in a terminal, for instance
+```
+$ ubase Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho một ông người lớn.
+Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.
 
-Download the repository, move into the `ubase` directory, and
+```
+
+If you prefer to build a local version, download the repository, move
+into the `ubase` directory, and
 
 ```
 dune build
 opam install .
 ```
+
+Ubase depends on `uutf`.
 
 ## Testing
 

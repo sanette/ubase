@@ -11,7 +11,9 @@
    contrary, store them in full UTF8 encoding, and use this library to simplify
    searching and comparison.
 
-    @author San Vu Ngoc, 2019
+   {{:https://github.com/sanette/ubase}Source on github}
+
+    @author San Vu Ngoc, 2019-2020
 
 *)
 
