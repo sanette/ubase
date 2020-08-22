@@ -45,8 +45,8 @@ val from_utf8 : ?malformed:string -> ?strip:string -> string -> string
    UTF8 text. Any malformed UTF8 will be replaced by the [malformed] parameter
    (by default "?"). If the optional parameter [strip] is present, all
    non-ASCII, non-Latin unicode characters will be replaced by the [strip]
-   string (which can be empty). If both [malformed] and [string] contain only
-   ASCII characters, then the result of [from_utf8_string] is guaranteed to
+   string (which can be empty). If both [malformed] and [strip] contain only
+   ASCII characters, then the result of [from_utf8] is guaranteed to
    contain only ASCII characters. *)
 
 val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
