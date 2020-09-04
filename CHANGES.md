@@ -1,6 +1,7 @@
 ## 0.04 (2020-08-22)
 
 add ligatures that do not contain "LETTER" in their names, like 0x0153
+(reported by @reynir)
 
 ## 0.03 (2020-07-18)
 
