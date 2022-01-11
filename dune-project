@@ -1,4 +1,4 @@
-(lang dune 1.11)
+(lang dune 2.7)
 (name ubase)
 (version "0.05")
 (generate_opam_files true)

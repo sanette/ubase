@@ -4,11 +4,8 @@
 
 (alias
  (name buildtest)
- (deps test.exe))	
+ (deps test.exe))
 
-(alias
- (name runtest)	
- (action	
-  (run %{exe:test.exe})
-  ))	
-  
+(rule
+ (alias runtest)
+ (action (run %{exe:test.exe})))

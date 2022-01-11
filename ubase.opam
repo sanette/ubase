@@ -4,16 +4,18 @@ version: "0.05"
 synopsis: "Remove diacritics from latin utf8 strings"
 maintainer: ["Vu Ngoc San <san.vu-ngoc@laposte.net>"]
 authors: ["Vu Ngoc San <san.vu-ngoc@laposte.net>"]
-license: "GPL2"
+license: "LGPL-3.0-or-later"
+tags: ["utf8"]
 homepage: "https://github.com/sanette/ubase"
 bug-reports: "https://github.com/sanette/ubase/issues"
 depends: [
-  "dune" {>= "1.11"}
+  "dune" {>= "2.7"}
   "uutf" {>= "1.0.1"}
   "ocaml" {>= "4.05.0"}
+  "odoc" {with-doc}
 ]
 build: [
-  ["dune" "subst"] {pinned}
+  ["dune" "subst"] {dev}
   [
     "dune"
     "build"
