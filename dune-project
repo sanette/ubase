@@ -12,5 +12,6 @@
  (synopsis "Remove diacritics from latin utf8 strings")
  (tags ("utf8"))
  (depends
+  (uutf (>= 1.0.1))
   (ocaml (>= 4.14.0))
 ))
