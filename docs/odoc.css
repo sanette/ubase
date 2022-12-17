@@ -668,19 +668,19 @@ td.def-doc *:first-child {
     body {
 	margin: 2ex;
     }
-    .odoc-content {
-	margin: auto;
-	padding: 2em;
-    }
-    .odoc-toc {
-	position: static;
-	width: auto;
-	min-width: unset;
-	max-width: unset;
-	border: none;
-	padding: 0.2em 1em;
-	border-radius: 5px;
-    }
+  .odoc-content {
+    margin: auto;
+    padding: 2em;
+  }
+  .odoc-toc {
+    position: static;
+    width: auto;
+    min-width: unset;
+    max-width: unset;
+    border: none;
+    padding: 0.2em 1em;
+    border-radius: 5px;
+  }
 }
 
 /* Print adjustements. */

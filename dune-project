@@ -1,6 +1,6 @@
 (lang dune 2.7)
 (name ubase)
-(version "0.05")
+(version "0.10")
 (generate_opam_files true)
 (license LGPL-3.0-or-later)
 (maintainers "Vu Ngoc San <san.vu-ngoc@laposte.net>")
@@ -12,6 +12,5 @@
  (synopsis "Remove diacritics from latin utf8 strings")
  (tags ("utf8"))
  (depends
-  (uutf (>= 1.0.1))
-  (ocaml (>= 4.05.0))	
+  (ocaml (>= 4.14.0))
 ))

@@ -54,21 +54,6 @@ let string_to_char ?(unknown='?') s =
 let uchar_to_char  ?(unknown='?') u =
   string_to_char ~unknown (uchar_to_string u)
 
-(* Deprecated because too slow, see [from_utf8] below. *)
-let from_utf8_old ?(malformed="?") ?strip s =
-  let b = Buffer.create (String.length s) in
-  let folder () _ = function
-    | `Malformed  _ -> Buffer.add_string b malformed
-    | `Uchar u ->
-      try Buffer.add_string b (uchar_to_string u)
-      with Not_found -> match strip with
-        | None -> Uutf.Buffer.add_utf_8 b u (* or [Buffer.add_utf_8_uchar b u]
-                                               for ocaml >*= 4.0.6 *)
-        | Some strip ->  Buffer.add_string b strip
-  in
-  Uutf.String.fold_utf_8 folder () s;
-  Buffer.contents b
-
 (* Using options in the main function is quite faster than exceptions:
    [uchar_to_string] ==> Test Vietnamese ==> number per sec = 27324
    [uchar_to_string_opt] ==> Test Vietnamese ==> number per sec = 36666
@@ -77,20 +62,26 @@ let from_utf8_old ?(malformed="?") ?strip s =
    Isolating the strip function ==> 37500
 *)
 let from_utf8 ?(malformed="?") ?strip s =
-  let b = Buffer.create (String.length s) in
+  let len = String.length s in
+  let b = Buffer.create len in
   let strip = match strip with
-    | None -> Uutf.Buffer.add_utf_8 b
+    | None -> Buffer.add_utf_8_uchar b
     | Some strip -> fun _ -> Buffer.add_string b strip in
-  let folder () _ = function
-    | `Malformed  _ -> Buffer.add_string b malformed
-    | `Uchar u ->
-      if Uchar.to_int u <= 127
-      then Uutf.Buffer.add_utf_8 b u
-      else match uchar_replacement u with
-      | Some t -> Buffer.add_string b t
-      | None -> strip u
+  let rec iterator i =
+    if i < len then
+      let dec = String.get_utf_8_uchar s i in
+      let () = if Uchar.utf_decode_is_valid dec
+               then let u = Uchar.utf_decode_uchar dec in
+                    if Uchar.to_int u <= 127
+                    then Buffer.add_utf_8_uchar b u
+                    else match uchar_replacement u with
+                         | Some t -> Buffer.add_string b t
+                         | None -> strip u
+               else (* not valid *)
+        Buffer.add_string b malformed
+      in iterator (i + Uchar.utf_decode_length dec)
   in
-  Uutf.String.fold_utf_8 folder () s;
+  iterator 0;
   Buffer.contents b
 
 (* For compatibility with older API *)

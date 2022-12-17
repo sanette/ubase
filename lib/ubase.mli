@@ -52,13 +52,6 @@ val from_utf8 : ?malformed:string -> ?strip:string -> string -> string
 val from_utf8_string : ?malformed:string -> ?strip:string -> string -> string
 (** Deprecated. Same as {!from_utf8}. *)
 
-(**/**)
-(* slower, initial version; just for testing. *)
-val from_utf8_old : ?malformed:string -> ?strip:string -> string -> string
-(**/**)
-
-(***)
-
 val uchar_replacement : Uchar.t -> string option
 (** [uchar_replacement u] returns the replacement string for [u], representing
    its base letter without accent or diacritics, but only if [u] admits such a
