@@ -62,7 +62,8 @@ dune build
 opam install .
 ```
 
-Ubase depends on `uutf`.
+Ubase versions >= 10 have no dependency, apart from ocaml >= 4.14.
+Previous versions depend on `uutf` but work with older ocamls.
 
 ## Quick test
 
