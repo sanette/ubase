@@ -72,8 +72,16 @@ val uchar_to_char : ?unknown:char -> Uchar.t -> char
 
 (** {1 Utilities} *)
 
-val isolatin_to_utf8 : string -> string
-(** Convert an ISO_8859_1 string to a UTF8 string. *)
+val isolatin_to_utf8 : ?control:int -> string -> string
+(** Convert an ISO_8859_1 string to a UTF8 string. ISO_8859_1 chars in the range
+    ''0x80..0x9F' are supposed to encode 'controls', and will be rendered by the
+    UTF8 symbol whose integer code is given by the [control] parameter (defaults
+    to [0x0080]) *)
+
+val cp1252_to_utf8 : ?undefined:int -> string -> string
+(** Convert a cp1252 string (also known as "windows-1252") to a UTF8 string. The
+    5 unassigned codes will be rendered by the UTF8 symbol whose integer code is
+    given by the [undefined] parameter (defaults to [0xFFFD]). *)
 
 val is_space : Uchar.t -> bool
 (** Return true if the character is considered as a white space (this includes

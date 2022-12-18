@@ -1,6 +1,6 @@
 (* Ubase,
    Conversion from UTF8 latin letters to their base character. *)
-(* San Vu Ngoc, 2019 *)
+(* San Vu Ngoc, 2019-2022 *)
 
 (*
    A similar OCaml library: https://github.com/geneweb/unidecode
@@ -89,30 +89,32 @@ let from_utf8_string = from_utf8
 
 (* Utilities *)
 
-(* From https://erratique.ch/software/uutf/doc/Uutf.html#examples *)
+let cp1252_to_utf8 ?(undefined=0xFFFD) s =
+  let len = String.length s in
+  let b = Buffer.create len in
+  for i = 0 to len - 1 do
+    let x = Char.code s.[i] in
+    let y =
+      if x <= 0x7F then x
+      else match Ubase_custom.cp1252_to_utf8_array.(x-0x80) with
+        | 0 -> undefined
+        | y -> y in
+    Buffer.add_utf_8_uchar b (Uchar.of_int y)
+  done;
+  Buffer.contents b
 
-let recode ?nln ?encoding out_encoding
-    (src : [`Channel of in_channel | `String of string])
-    (dst : [`Channel of out_channel | `Buffer of Buffer.t])
-  =
-  let rec loop d e = match Uutf.decode d with
-  | `Uchar _ as u -> ignore (Uutf.encode e u); loop d e
-  | `End -> ignore (Uutf.encode e `End)
-  | `Malformed _ -> ignore (Uutf.encode e (`Uchar Uutf.u_rep)); loop d e
-  | `Await -> assert false
-  in
-  let d = Uutf.decoder ?nln ?encoding src in
-  let e = Uutf.encoder out_encoding dst in
-  loop d e
-
-(******)
-
-(* convert iso_8859_1 to NFC utf8 *)
-let isolatin_to_utf8 s =
-  let encoding = `ISO_8859_1 in
-  let b = Buffer.create ((String.length s)*2) in
-  recode ~encoding `UTF_8 (`String s) (`Buffer b);
-  Buffer.contents b;;
+let isolatin_to_utf8 ?(control=0x0080) s =
+  let len = String.length s in
+  let b = Buffer.create len in
+  for i = 0 to len - 1 do
+    let x = Char.code s.[i] in
+    if x <= 0x7F then Buffer.add_char b (Char.chr x)
+    else let y = if x >= 0x80 && x <= 0x9F
+           then control
+           else Ubase_custom.cp1252_to_utf8_array.(x-0x80) in
+      Buffer.add_utf_8_uchar b (Uchar.of_int y)
+  done;
+  Buffer.contents b
 
 let white_space_set = Iset.of_list Ubase_data.white_space
 

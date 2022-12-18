@@ -1,3 +1,10 @@
+## 0.20 (2022/12/18) Remove uutf dependency
+
+* `isolatin_to_utf8` now uses an included table based on
+http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1252.TXT
+
+* add `cp1252_to_utf8`
+
 ## 0.10 (2022/12/17) Faster
 
 * 25% Faster thanks to the use `String.get_utf_8_uchar` instead of
@@ -28,4 +35,3 @@ See https://discuss.ocaml.org/t/simplify-roman-utf8/4398/39
 ## 0.01 (2019-09-18)
 
 first version
-
