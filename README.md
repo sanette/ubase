@@ -13,19 +13,19 @@ this library to simplify searching and comparison.
 ## Example
 
 ```ocaml
-let nfc = "V\197\169 Ng\225\187\141c Phan";; 
+let nfc = "V\197\169 Ng\225\187\141c Phan";;
 let nfd = "Vu\204\131 Ngo\204\163c Phan";;
 
-print_endline nfc;; 
+print_endline nfc;;
 Vũ Ngọc Phan
 
-print_endline nfd;; 
+print_endline nfd;;
 Vũ Ngọc Phan
 
 Ubase.from_utf8 nfc;;
 - : string = "Vu Ngoc Phan"
 
-Ubase.from_utf8 nfd;; 
+Ubase.from_utf8 nfd;;
 - : string = "Vu Ngoc Phan"
 ```
 
@@ -42,7 +42,7 @@ val from_utf8 : ?malformed:string -> ?strip:string -> string -> string
    contain only ASCII characters. *)
 ```
 
-If your accented string is encoded in isolatin, you first have to
+If your accented string is encoded in isolatin (8859-1), you first have to
 convert it to utf8 using `isolatin_to_utf8 mystring`.
 
 
@@ -52,7 +52,7 @@ convert it to utf8 using `isolatin_to_utf8 mystring`.
 ```
 opam install ubase
 ```
-That's it! 
+That's it!
 
 If you prefer to build a local version, download the repository, move
 into the `ubase` directory, and
@@ -84,15 +84,13 @@ program from a terminal
 $ ubase Déjà vu !
 Deja vu !
 
-$ ubase "et grønt træ"
-et gront trae
+$ ubase "Bøǹĵöůɍ"
+Bonjour
 
 $ ubase Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho một ông người lớn.
 Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.
 
 ```
-
-(Notice that the quotes "" are not required)
 
 ## Doc
 
