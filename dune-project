@@ -6,6 +6,7 @@
 (maintainers "Vu Ngoc San <san.vu-ngoc@laposte.net>")
 (authors "Vu Ngoc San <san.vu-ngoc@laposte.net>")
 (source (github sanette/ubase))
+(formatting disabled)
 
 (package
  (name ubase)
