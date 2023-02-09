@@ -39,7 +39,7 @@ jobs:
 
       - run: opam install .
 
-      - run: cd $(opam var prefix); tar -cvf snoke.tar bin/ubase
+      - run: cd $(opam var prefix); tar -cvf ubase.tar bin/ubase
 
       - run: mv $(opam var prefix)/ubase.tar .
 
