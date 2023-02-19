@@ -1,7 +1,8 @@
 # Ubase
 
-Ocaml library for removing diacritics (accents, etc.) from Latin
-letters in UTF8 string.
+Ubase is a command-line [program](#the-ubase-program) and an Ocaml
+library for removing diacritics (accents, etc.) from Latin letters in
+UTF8 string.
 
 It should work for all utf8 strings, regardless of normalization NFC,
 NFD, NFKD, NFKC.
@@ -9,6 +10,8 @@ NFD, NFKD, NFKC.
 __Please__ don't use this library to store your strings without
 accents! On the contrary, store them in full UTF8 encoding, and use
 this library to simplify searching and comparison.
+
+# Ubase OCaml library
 
 ## Example
 
@@ -78,19 +81,7 @@ dune utop
 ### From the command line
 
 Once you have installed the library, you can execute the `ubase`
-program from a terminal
-
-```
-$ ubase Déjà vu !
-Deja vu !
-
-$ ubase "Bøǹĵöůɍ"
-Bonjour
-
-$ ubase Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho một ông người lớn.
-Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.
-
-```
+[program](#the-ubase-program) from a terminal.
 
 ## Doc
 
@@ -108,3 +99,27 @@ firefox ./_build/default/_doc/_html/ubase/Ubase/index.html
 
 Have a look at [Ufind](https://github.com/sanette/ufind), a small
 search engine based on Ubase.
+
+# The `ubase` program
+
+If you installed the library, the `ubase` program is automatically installed.
+If you don't need the library, you may
+directly download the binary:
+
+* [linux binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-ubuntu.zip)
+* [mac os binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-macos.zip)
+
+You can execute the `ubase` program from a terminal. Its usage is
+straighforward:
+
+```
+$ ubase Déjà vu !
+Deja vu !
+
+$ ubase "Bøǹĵöůɍ"
+Bonjour
+
+$ ubase Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho một ông người lớn.
+Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.
+
+```
