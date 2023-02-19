@@ -1,6 +1,6 @@
 # Ubase
 
-Ubase is a command-line [program](#the-ubase-program) and an Ocaml
+Ubase is a command-line [program](#the-ubase-program), a [javascript](#ubase.js-the-javascript-executable) executable, and an Ocaml
 library for removing diacritics (accents, etc.) from Latin letters in
 UTF8 string.
 
@@ -102,9 +102,10 @@ search engine based on Ubase.
 
 # The `ubase` program
 
-If you installed the library, the `ubase` program is automatically installed.
-If you don't need the library, you may
-directly download the binary:
+If you installed the library, the `ubase` program is automatically
+installed.  If you don't need the library, you may directly download
+the binary from the
+[Releases](https://github.com/sanette/ubase/releases) page, or here:
 
 * [linux binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-ubuntu.zip)
 * [mac os binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-macos.zip)
@@ -123,3 +124,17 @@ $ ubase Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho m�
 Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.
 
 ```
+
+# `ubase.js`, the javascript executable
+
+The standalone javascript version of ubase is [`ubase.js`](https://github.com/sanette/ubase/releases/download/0.20/ubase-js.zip). You can test it with `node`:
+
+```
+$ node ubase.js Bøǹĵöůɍ
+Bonjour
+
+```
+
+The javascript version was automatically produced from the OCaml
+library using
+[`js-of-ocaml`](https://ocsigen.org/js_of_ocaml/latest/manual/overview)
