@@ -1,6 +1,6 @@
 # Ubase
 
-Ubase is a command-line [program](#the-ubase-program), a [javascript](#ubase.js-the-javascript-executable) executable, and an Ocaml
+Ubase is a command-line [program](#the-ubase-program), a [javascript](#ubasejs-the-javascript-executable) executable, and an Ocaml
 library for removing diacritics (accents, etc.) from Latin letters in
 UTF8 string.
 
