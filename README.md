@@ -1,10 +1,11 @@
 # Ubase
 
-Ubase is a command-line [program](#the-ubase-program), and an Ocaml
-library for removing diacritics (accents, etc.) from Latin letters in
-UTF8 string. For instance, "é" -> "e", "🅴" -> "E", etc. There is also
-a corresponding [javascript](https://github.com/sanette/ubase.js)
-library and executable,
+Ubase is a command-line [program](#the-ubase-program), and an
+[OCaml library](#ubase-ocaml-library) for removing diacritics
+(accents, etc.) from Latin letters in UTF8 string. For instance, "é"
+-> "e", "🅴" -> "E", etc. There is also a corresponding
+[javascript](https://github.com/sanette/ubase.js) library and
+executable.
 
 It should work for all utf8 strings, regardless of normalization NFC,
 NFD, NFKD, NFKC.
