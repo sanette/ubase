@@ -1,8 +1,10 @@
 # Ubase
 
-Ubase is a command-line [program](#the-ubase-program), a [javascript](#ubasejs-the-javascript-executable) executable, and an Ocaml
+Ubase is a command-line [program](#the-ubase-program), and an Ocaml
 library for removing diacritics (accents, etc.) from Latin letters in
-UTF8 string.
+UTF8 string. For instance, "é" -> "e", "🅴" -> "E", etc. There is also
+a corresponding [javascript](https://github.com/sanette/ubase.js)
+library and executable,
 
 It should work for all utf8 strings, regardless of normalization NFC,
 NFD, NFKD, NFKC.
@@ -100,6 +102,11 @@ firefox ./_build/default/_doc/_html/ubase/Ubase/index.html
 Have a look at [Ufind](https://github.com/sanette/ufind), a small
 search engine based on Ubase.
 
+## UTF8 coverage
+
+`Ubase` covers more than 2000 utf8 chars, it should be quite
+complete. File an issue if some character is not properly 'basified'.
+
 # The `ubase` program
 
 If you installed the library, the `ubase` program is automatically
@@ -109,6 +116,7 @@ the binary from the
 
 * [linux binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-ubuntu.zip)
 * [mac os binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-macos.zip)
+* [javascript executable](https://github.com/sanette/ubase.js)
 
 You can execute the `ubase` program from a terminal. Its usage is
 straighforward:
@@ -124,17 +132,3 @@ $ ubase Anh xin lỗi các em bé vì đã đề tặng cuốn sách này cho m�
 Anh xin loi cac em be vi da de tang cuon sach nay cho mot ong nguoi lon.
 
 ```
-
-# `ubase.js`, the javascript executable
-
-The standalone javascript version of ubase is [`ubase.js`](https://github.com/sanette/ubase/releases/download/0.20/ubase-js.zip). You can test it with `node`:
-
-```
-$ node ubase.js Bøǹĵöůɍ
-Bonjour
-
-```
-
-The javascript version was automatically produced from the OCaml
-library using
-[`js-of-ocaml`](https://ocsigen.org/js_of_ocaml/latest/manual/overview)

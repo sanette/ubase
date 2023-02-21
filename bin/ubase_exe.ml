@@ -24,7 +24,6 @@ let () =
   Arg.parse speclist anon_func usage_msg;
 
   (* Executing command *)
-  let out = Ubase.from_utf8_string ~malformed:!malformed ?strip:!strip
+  let out = Ubase.from_utf8 ~malformed:!malformed ?strip:!strip
       (Buffer.contents text) in
   print_endline out;;
-

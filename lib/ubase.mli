@@ -1,19 +1,19 @@
 (** Conversion from UTF8 latin letters to their base character.
 
-    Use this to remove diacritics (accents, etc.) from Latin letters in UTF8
-   string.
+    Use this library to remove diacritics (accents, etc.) from Latin letters in
+    UTF8 string.
 
-    Depends on [uutf].  It should work for all utf8 strings, regardless of
-   normalization NFC, NFD, NFKD, NFKC.
+    It should work for all utf8 strings, regardless of normalization NFC, NFD,
+    NFKD, NFKC.
 
 
     PLEASE don't use this library to store your strings without accents! On the
-   contrary, store them in full UTF8 encoding, and use this library to simplify
-   searching and comparison.
+    contrary, store them in full UTF8 encoding, and use this library to simplify
+    searching and comparison.
 
-   {{:https://github.com/sanette/ubase}Source on github}
+    {{:https://github.com/sanette/ubase}Source on github}
 
-    @author San Vu Ngoc, 2019-2020
+    @author San Vu Ngoc, 2019-2023
 
 *)
 
