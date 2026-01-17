@@ -46,7 +46,7 @@ jobs:
       - run: mv $(opam var prefix)/ubase.tar .
 
       - name: Upload the build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ubase-binary-${{ matrix.os }}-${{ matrix.ocaml-compiler }}
           path: ubase.tar
