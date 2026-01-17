@@ -112,8 +112,12 @@ complete. File an issue if some character is not properly 'basified'.
 
 If you installed the library, the `ubase` program is automatically
 installed.  If you don't need the library, you may directly download
-the binary from the
-[Releases](https://github.com/sanette/ubase/releases) page, or here:
+the binary from the "Artifacts" section of Github actions (go to
+https://github.com/sanette/ubase/actions/ and select the most recent
+workflow.)
+
+Also from [Releases](https://github.com/sanette/ubase/releases) page,
+or here:
 
 * [linux binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-ubuntu.zip)
 * [mac os binary](https://github.com/sanette/ubase/releases/download/0.20/ubase-binary-macos.zip)
