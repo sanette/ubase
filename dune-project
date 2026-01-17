@@ -1,6 +1,6 @@
 (lang dune 2.7)
 (name ubase)
-(version "0.20")
+(version "0.20.1")
 (generate_opam_files true)
 (license LGPL-3.0-or-later)
 (maintainers "Vu Ngoc San <san.vu-ngoc@laposte.net>")

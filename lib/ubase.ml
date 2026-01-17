@@ -20,13 +20,15 @@
 
 
 module Int = struct type t = int let compare : int -> int -> int = compare end
-module Imap = Map.Make(Int)
 module Iset = Set.Make(Int)
 
-let latin_uchar_to_base_map =
-  let add map (k, v) = Imap.add k v map in
-  let map1 = List.fold_left add Imap.empty Ubase_data.latin_uchar_to_base_alist in
-  List.fold_left add map1 Ubase_custom.misc_to_ascii_alist
+(* Using Hashtbl is not significantly faster than Map *)
+let latin_uchar_to_base_tbl =
+  let add tbl (k, (v : string )) = Hashtbl.add tbl k v in
+  let tbl1 = Hashtbl.create 2133 in
+  List.iter (add tbl1) Ubase_data.latin_uchar_to_base_alist;
+  List.iter (add tbl1) Ubase_custom.misc_to_ascii_alist;
+  tbl1
 
 (* Convert a latin utf8 char to a string which represents is base equivalent.
    For instance, for the letter "é", [uchar_to_string (Uchar.of_int 0xe8) =
@@ -40,10 +42,10 @@ let latin_uchar_to_base_map =
 let uchar_to_string u =
   let x = Uchar.to_int u in
   if x <= 126 then Char.chr x |> String.make 1
-  else Imap.find (Uchar.to_int u) latin_uchar_to_base_map
+  else Hashtbl.find latin_uchar_to_base_tbl (Uchar.to_int u)
 
 let uchar_replacement u =
-  Imap.find_opt (Uchar.to_int u) latin_uchar_to_base_map
+  Hashtbl.find_opt latin_uchar_to_base_tbl (Uchar.to_int u)
 
 let string_to_char ?(unknown='?') s =
   if String.length s > 2 then unknown
